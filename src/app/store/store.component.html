@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3 p-2">
+      <button
+        class="btn btn-block btn-outline-primary"
+        [class.active]="selectedCategory === null"
+        (click)="changeCategory(null)">
+        Home
+      </button>
+
+      <button
+        *ngFor="let category of categories"
+        class="btn btn-block btn-outline-primary"
+        [class.active]="category === selectedCategory"
+        (click)="changeCategory(category)">
+        {{ category }}
+      </button>
+    </div>
+
+    <div class="col-9 p-2">
+      <div *ngFor="let product of products" class="card m-1 p-1 bg-light">
+        <h4>
+          {{ product.name }}
+          <span class="badge badge-pill badge-primary float-right">
+            {{ product.price | currency:"GBP":"symbol":"2.2-2" }}
+          </span>
+        </h4>
+        <div class="card-text bg-white p-1">
+          {{ product.description }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
