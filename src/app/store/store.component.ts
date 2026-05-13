@@ -20,7 +20,8 @@ export class StoreComponent {
   get products(): Product[] {
     const pageIndex = (this.selectedPage - 1) * this.productsPerPage; 
     
-    return this.repository.getProducts(this.selectedCategory)
+    return this.repository
+    .getProducts(this.selectedCategory)
     .slice(pageIndex, pageIndex + this.productsPerPage);
   }
 
@@ -28,14 +29,12 @@ export class StoreComponent {
     return this.repository.getCategories();
   }
 
-  get pageNumbers(): number[] {
-    return Array(
-      Math.ceil(
-        this.repository.getProducts(this.selectedCategory).length /this.productsPerPage
-      )
-    )
-      .fill(0)
-      .map((Value, index) => index + 1);
+  get pageCount(): number {
+    return Math.ceil(
+        this.repository.getProducts(this.selectedCategory).length /
+        this.productsPerPage
+      );
+  
   }
 
   changeCategory(newCategory: string | null): void {
